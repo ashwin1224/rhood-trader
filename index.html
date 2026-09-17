@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Weekly Trader — P&amp;L Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f7f8fa;
+    --panel: #ffffff;
+    --border: #e3e6ea;
+    --text: #1a1d21;
+    --muted: #6b7280;
+    --accent: #2563eb;
+    --pos: #15803d;
+    --neg: #b91c1c;
+    --pos-bg: #ecfdf3;
+    --neg-bg: #fef2f2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115;
+      --panel: #171a21;
+      --border: #2a2e37;
+      --text: #e6e8eb;
+      --muted: #9aa1ab;
+      --accent: #5b8def;
+      --pos: #4ade80;
+      --neg: #f87171;
+      --pos-bg: #10231a;
+      --neg-bg: #2a1414;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding: 20px 16px 48px;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+  h1 { font-size: 1.4rem; margin: 0; }
+  .meta { color: var(--muted); font-size: 0.85rem; }
+  .stale-banner {
+    display: none;
+    background: var(--neg-bg); color: var(--neg); border: 1px solid var(--neg);
+    padding: 8px 12px; border-radius: 8px; font-size: 0.85rem; margin: 12px 0;
+  }
+  .section-title { font-size: 1.2rem; margin: 32px 0 12px; }
+  .kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+  .kv div { font-size: 0.85rem; }
+  .kv span { display: block; color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: .03em; }
+  .tag { background: var(--muted); color: var(--panel); border-radius: 999px; padding: 1px 8px; font-size: 0.7rem; white-space: nowrap; }
+  .tag-pending { background: var(--muted); }
+  .tag-approved { background: var(--accent); }
+  .tag-filled { background: var(--pos); }
+  .tag-rejected { background: var(--neg); }
+  .tag-carryover { background: var(--muted); }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .card .label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: .04em; }
+  .card .value { font-size: 1.5rem; font-weight: 650; margin-top: 4px; }
+  .card .sub { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+  .pos { color: var(--pos); }
+  .neg { color: var(--neg); }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+  }
+  .panel h2 { font-size: 1rem; margin: 0 0 12px; }
+  .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .tabs { display: flex; gap: 6px; }
+  .tab-btn {
+    background: transparent; border: 1px solid var(--border); color: var(--text);
+    padding: 5px 12px; border-radius: 999px; font-size: 0.82rem; cursor: pointer;
+  }
+  .tab-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  canvas { max-width: 100%; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  th { color: var(--muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; }
+  tbody tr:hover { background: rgba(127,127,127,0.06); }
+  .empty { color: var(--muted); font-size: 0.85rem; padding: 12px 2px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 760px) { .grid-2 { grid-template-columns: 1fr; } }
+  .footer-note { color: var(--muted); font-size: 0.78rem; margin-top: 24px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Weekly Trader — P&amp;L Dashboard</h1>
+    <div class="meta" id="generatedAt">loading…</div>
+  </header>
+  <div class="stale-banner" id="staleBanner"></div>
+
+  <div class="cards" id="cards"></div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <h2>P&amp;L by day</h2>
+      <div class="tabs" id="periodTabs">
+        <button class="tab-btn active" data-period="mtd">MTD</button>
+        <button class="tab-btn" data-period="ytd">YTD</button>
+        <button class="tab-btn" data-period="all">All</button>
+      </div>
+    </div>
+    <canvas id="pnlChart" height="90"></canvas>
+    <div class="empty" id="pnlEmpty" style="display:none;">No closed trades in this period yet.</div>
+  </div>
+
+  <div class="panel">
+    <h2>Equity curve</h2>
+    <canvas id="equityChart" height="90"></canvas>
+    <div class="empty" id="equityEmpty" style="display:none;">No account snapshots recorded yet.</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="panel">
+      <h2>Open positions</h2>
+      <div id="openPositionsTable"></div>
+    </div>
+    <div class="panel">
+      <h2>Closed positions</h2>
+      <div id="closedPositionsTable"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Trades</h2>
+    <div id="tradesTable"></div>
+  </div>
+
+  <div id="researchSection" style="display:none;">
+    <h2 class="section-title">Latest Market Analysis</h2>
+    <div id="researchContent"></div>
+  </div>
+
+  <div class="footer-note">
+    Static snapshot dashboard — not connected to any live data source. Regenerate with
+    <code>weekly-trader export-snapshot</code> and redeploy to refresh.
+  </div>
+</div>
+
+<script>
+const money = (v, opts = {}) => {
+  if (v === null || v === undefined) return "—";
+  return v.toLocaleString(undefined, { style: "currency", currency: "USD", ...opts });
+};
+const pct = (v) => (v === null || v === undefined) ? "—" : `${(v * 100).toFixed(1)}%`;
+const signClass = (v) => (v === null || v === undefined) ? "" : (v > 0 ? "pos" : v < 0 ? "neg" : "");
+const fmtDate = (iso) => iso ? new Date(iso).toLocaleDateString() : "—";
+const fmtDateTime = (iso) => iso ? new Date(iso).toLocaleString() : "—";
+
+function renderTable(container, columns, rows, emptyMsg) {
+  if (!rows || rows.length === 0) {
+    container.innerHTML = `<div class="empty">${emptyMsg}</div>`;
+    return;
+  }
+  const thead = `<thead><tr>${columns.map(c => `<th>${c.label}</th>`).join("")}</tr></thead>`;
+  const tbody = `<tbody>${rows.map(r => `<tr>${columns.map(c => `<td class="${c.cls ? c.cls(r) : ''}">${c.render(r)}</td>`).join("")}</tr>`).join("")}</tbody>`;
+  container.innerHTML = `<table>${thead}${tbody}</table>`;
+}
+
+function renderCards(summary) {
+  const cur = summary.current, mtd = summary.mtd, ytd = summary.ytd;
+  const cards = [
+    { label: "Equity (current)", value: money(cur.equity), sub: cur.cash !== null ? `Cash: ${money(cur.cash)}` : "" },
+    { label: "Open positions", value: cur.open_positions ?? 0, sub: "" },
+    { label: "Total realized P&L", value: money(cur.total_realized_pnl), cls: signClass(cur.total_realized_pnl) },
+    { label: "MTD P&L", value: money(mtd.realized_pnl), sub: `${mtd.trades_closed} closed · win rate ${pct(mtd.win_rate)}`, cls: signClass(mtd.realized_pnl) },
+    { label: "YTD P&L", value: money(ytd.realized_pnl), sub: `${ytd.trades_closed} closed · win rate ${pct(ytd.win_rate)}`, cls: signClass(ytd.realized_pnl) },
+  ];
+  document.getElementById("cards").innerHTML = cards.map(c => `
+    <div class="card">
+      <div class="label">${c.label}</div>
+      <div class="value ${c.cls || ''}">${c.value}</div>
+      ${c.sub ? `<div class="sub">${c.sub}</div>` : ""}
+    </div>`).join("");
+}
+
+let pnlChart, equityChart;
+
+function filterByPeriod(pnlByDay, period, asOfDate) {
+  if (period === "all") return pnlByDay;
+  const key = period === "mtd" ? asOfDate.slice(0, 7) : asOfDate.slice(0, 4);
+  return pnlByDay.filter(r => r.date.slice(0, key.length) === key);
+}
+
+function renderPnlChart(pnlByDay, period, asOfDate) {
+  const rows = filterByPeriod(pnlByDay, period, asOfDate);
+  const emptyEl = document.getElementById("pnlEmpty");
+  const canvas = document.getElementById("pnlChart");
+  if (rows.length === 0) {
+    emptyEl.style.display = "block";
+    canvas.style.display = "none";
+    return;
+  }
+  emptyEl.style.display = "none";
+  canvas.style.display = "block";
+  const labels = rows.map(r => r.date);
+  const data = rows.map(r => r.realized_pnl);
+  const colors = data.map(v => v >= 0 ? "#22c55e" : "#ef4444");
+  if (pnlChart) pnlChart.destroy();
+  pnlChart = new Chart(canvas, {
+    type: "bar",
+    data: { labels, datasets: [{ label: "Realized P&L", data, backgroundColor: colors }] },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: { y: { ticks: { callback: (v) => money(v, { maximumFractionDigits: 0 }) } } },
+    },
+  });
+}
+
+function renderEquityChart(equityCurve) {
+  const emptyEl = document.getElementById("equityEmpty");
+  const canvas = document.getElementById("equityChart");
+  if (!equityCurve || equityCurve.length === 0) {
+    emptyEl.style.display = "block";
+    canvas.style.display = "none";
+    return;
+  }
+  emptyEl.style.display = "none";
+  canvas.style.display = "block";
+  if (equityChart) equityChart.destroy();
+  equityChart = new Chart(canvas, {
+    type: "line",
+    data: {
+      labels: equityCurve.map(p => p.date),
+      datasets: [{
+        label: "Equity", data: equityCurve.map(p => p.equity),
+        borderColor: "#2563eb", backgroundColor: "rgba(37,99,235,0.12)", fill: true, tension: 0.2, pointRadius: 2,
+      }],
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: { y: { ticks: { callback: (v) => money(v, { maximumFractionDigits: 0 }) } } },
+    },
+  });
+}
+
+async function main() {
+  let snapshot;
+  try {
+    const res = await fetch("./snapshot.json", { cache: "no-store" });
+    snapshot = await res.json();
+  } catch (e) {
+    document.getElementById("cards").innerHTML = `<div class="empty">Could not load snapshot.json — make sure it's deployed alongside index.html.</div>`;
+    return;
+  }
+
+  document.getElementById("generatedAt").textContent = `Snapshot as of ${fmtDateTime(snapshot.generated_at)}`;
+
+  fetch("./latest_research_report.html", { cache: "no-store" })
+    .then((res) => (res.ok ? res.text() : null))
+    .then((markup) => {
+      if (!markup) return;
+      document.getElementById("researchContent").innerHTML = markup;
+      document.getElementById("researchSection").style.display = "block";
+    })
+    .catch(() => {});
+
+  const ageMs = Date.now() - new Date(snapshot.generated_at).getTime();
+  if (ageMs > 1000 * 60 * 60 * 24 * 7) {
+    const banner = document.getElementById("staleBanner");
+    banner.style.display = "block";
+    banner.textContent = `This snapshot is over a week old (generated ${fmtDateTime(snapshot.generated_at)}). Regenerate it with "weekly-trader export-snapshot".`;
+  }
+
+  renderCards(snapshot.summary);
+  renderEquityChart(snapshot.equity_curve);
+
+  let period = "mtd";
+  renderPnlChart(snapshot.pnl_by_day, period, snapshot.as_of_date);
+  document.querySelectorAll("#periodTabs .tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#periodTabs .tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      period = btn.dataset.period;
+      renderPnlChart(snapshot.pnl_by_day, period, snapshot.as_of_date);
+    });
+  });
+
+  renderTable(
+    document.getElementById("openPositionsTable"),
+    [
+      { label: "Symbol", render: r => r.symbol },
+      { label: "Qty", render: r => r.quantity ?? "—" },
+      { label: "Entry", render: r => money(r.entry_price) },
+      { label: "Opened", render: r => fmtDate(r.opened_date) },
+      { label: "Status", render: r => r.status },
+    ],
+    snapshot.positions_open,
+    "No open positions."
+  );
+
+  renderTable(
+    document.getElementById("closedPositionsTable"),
+    [
+      { label: "Symbol", render: r => r.symbol },
+      { label: "Qty", render: r => r.quantity },
+      { label: "Entry", render: r => money(r.entry_price) },
+      { label: "Close", render: r => money(r.close_price) },
+      { label: "Closed", render: r => fmtDate(r.closed_date) },
+      { label: "P&L", render: r => money(r.realized_pnl), cls: r => signClass(r.realized_pnl) },
+      { label: "Return", render: r => r.return_pct !== null ? `${r.return_pct}%` : "—", cls: r => signClass(r.return_pct) },
+    ],
+    snapshot.positions_closed,
+    "No closed positions yet."
+  );
+
+  renderTable(
+    document.getElementById("tradesTable"),
+    [
+      { label: "Date", render: r => fmtDateTime(r.date) },
+      { label: "Symbol", render: r => r.symbol },
+      { label: "Side", render: r => r.side },
+      { label: "Qty", render: r => r.quantity },
+      { label: "Price", render: r => money(r.price) },
+      { label: "Value", render: r => money(r.value) },
+    ],
+    snapshot.trades,
+    "No trades recorded yet."
+  );
+}
+
+main();
+</script>
+</body>
+</html>
