@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-09-20T23:36:39.592183+00:00",
-  "as_of_date": "2026-09-20",
+  "generated_at": "2026-09-21T13:48:13.496845+00:00",
+  "as_of_date": "2026-09-21",
   "summary": {
     "current": {
       "equity": 100.0,
       "cash": 100.0,
-      "open_positions": 0,
+      "open_positions": 2,
       "total_realized_pnl": 0
     },
     "mtd": {
@@ -27,7 +27,39 @@
     }
   ],
   "pnl_by_day": [],
-  "positions_open": [],
+  "positions_open": [
+    {
+      "symbol": "MSFT",
+      "status": "OPEN",
+      "quantity": 0.040534,
+      "entry_price": 493.41,
+      "opened_date": "2026-09-21"
+    },
+    {
+      "symbol": "AAPL",
+      "status": "OPEN",
+      "quantity": 0.044767,
+      "entry_price": 335.07,
+      "opened_date": "2026-09-21"
+    }
+  ],
   "positions_closed": [],
-  "trades": []
+  "trades": [
+    {
+      "date": "2026-09-21T17:48:13.530223+00:00",
+      "symbol": "MSFT",
+      "side": "BUY",
+      "quantity": 0.040534,
+      "price": 493.41,
+      "value": 20.0
+    },
+    {
+      "date": "2026-09-21T17:48:15.304394+00:00",
+      "symbol": "AAPL",
+      "side": "BUY",
+      "quantity": 0.044767,
+      "price": 335.07,
+      "value": 15.0
+    }
+  ]
 }
