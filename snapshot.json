@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-02T20:30:04.344815+00:00",
-  "as_of_date": "2026-10-02",
+  "generated_at": "2026-10-04T22:15:13.478101+00:00",
+  "as_of_date": "2026-10-04",
   "summary": {
     "current": {
-      "equity": 50.353986,
+      "equity": 51.339994,
       "cash": 0.000144,
       "open_positions": 3,
       "total_realized_pnl": 0
@@ -39,6 +39,11 @@
       "date": "2026-09-30T00:46:09.896648+00:00",
       "equity": 50.353986,
       "cash": 0.000144
+    },
+    {
+      "date": "2026-10-05T02:15:13.478101+00:00",
+      "equity": 51.339994,
+      "cash": 0.000144
     }
   ],
   "pnl_by_day": [],
@@ -52,14 +57,14 @@
     },
     {
       "symbol": "AAPL",
-      "status": "WATCH",
+      "status": "CARRIED",
       "quantity": 0.044767,
       "entry_price": 335.07,
       "opened_date": "2026-09-21"
     },
     {
       "symbol": "NVDA",
-      "status": "OPEN",
+      "status": "CARRIED",
       "quantity": 0.065841,
       "entry_price": 227.82,
       "opened_date": "2026-09-29"
