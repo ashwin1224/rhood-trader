@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-10-09T04:22:58.955186+00:00",
+  "generated_at": "2026-10-09T04:24:42.907347+00:00",
   "as_of_date": "2026-10-09",
   "summary": {
     "current": {
-      "equity": 10000.0,
-      "cash": 10000.0,
-      "open_positions": 0,
+      "equity": 9939.364717,
+      "cash": 999.999876,
+      "open_positions": 3,
       "total_realized_pnl": 0
     },
     "mtd": {
@@ -24,10 +24,62 @@
       "date": "2026-10-09T08:19:53.985752+00:00",
       "equity": 10000.0,
       "cash": 10000.0
+    },
+    {
+      "date": "2026-10-09T08:24:42.907347+00:00",
+      "equity": 9939.364717,
+      "cash": 999.999876
     }
   ],
   "pnl_by_day": [],
-  "positions_open": [],
+  "positions_open": [
+    {
+      "symbol": "RXO",
+      "status": "OPEN",
+      "quantity": 138.07387,
+      "entry_price": 28.97,
+      "opened_date": "2026-10-09"
+    },
+    {
+      "symbol": "PBF",
+      "status": "OPEN",
+      "quantity": 38.906181,
+      "entry_price": 89.96,
+      "opened_date": "2026-10-09"
+    },
+    {
+      "symbol": "P",
+      "status": "OPEN",
+      "quantity": 9.756098,
+      "entry_price": 153.75,
+      "opened_date": "2026-10-09"
+    }
+  ],
   "positions_closed": [],
-  "trades": []
+  "trades": [
+    {
+      "date": "2026-10-09T08:24:42.934913+00:00",
+      "symbol": "RXO",
+      "side": "BUY",
+      "quantity": 138.07387,
+      "price": 28.97,
+      "value": 4000.0
+    },
+    {
+      "date": "2026-10-09T08:24:45.273929+00:00",
+      "symbol": "PBF",
+      "side": "BUY",
+      "quantity": 38.906181,
+      "price": 89.96,
+      "value": 3500.0
+    },
+    {
+      "date": "2026-10-09T08:24:46.305354+00:00",
+      "symbol": "P",
+      "side": "BUY",
+      "quantity": 9.756098,
+      "price": 153.75,
+      "value": 1500.0
+    }
+  ]
 }
