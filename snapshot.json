@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T03:07:11.122354+00:00",
+  "generated_at": "2026-10-13T20:47:02.162665+00:00",
   "as_of_date": "2026-10-13",
   "summary": {
     "current": {
@@ -49,7 +49,7 @@
     },
     {
       "symbol": "SNOW",
-      "status": "OPEN",
+      "status": "WATCH",
       "quantity": 5.603654,
       "entry_price": 356.91,
       "opened_date": "2026-10-12"
