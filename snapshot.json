@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-10-12T21:43:51.102775+00:00",
-  "as_of_date": "2026-10-12",
+  "generated_at": "2026-10-13T03:07:11.122354+00:00",
+  "as_of_date": "2026-10-13",
   "summary": {
     "current": {
-      "equity": 10000.0,
-      "cash": 10000.0,
-      "open_positions": 0,
+      "equity": 10108.420494,
+      "cash": 799.999826,
+      "open_positions": 3,
       "total_realized_pnl": 0
     },
     "mtd": {
@@ -24,10 +24,62 @@
       "date": "2026-10-12T02:00:08.532413+00:00",
       "equity": 10000.0,
       "cash": 10000.0
+    },
+    {
+      "date": "2026-10-13T07:07:11.122354+00:00",
+      "equity": 10108.420494,
+      "cash": 799.999826
     }
   ],
   "pnl_by_day": [],
-  "positions_open": [],
+  "positions_open": [
+    {
+      "symbol": "RXO",
+      "status": "OPEN",
+      "quantity": 138.744364,
+      "entry_price": 28.83,
+      "opened_date": "2026-10-12"
+    },
+    {
+      "symbol": "PENG",
+      "status": "OPEN",
+      "quantity": 41.808205,
+      "entry_price": 76.54,
+      "opened_date": "2026-10-12"
+    },
+    {
+      "symbol": "SNOW",
+      "status": "OPEN",
+      "quantity": 5.603654,
+      "entry_price": 356.91,
+      "opened_date": "2026-10-12"
+    }
+  ],
   "positions_closed": [],
-  "trades": []
+  "trades": [
+    {
+      "date": "2026-10-13T07:07:11.164508+00:00",
+      "symbol": "RXO",
+      "side": "BUY",
+      "quantity": 138.744364,
+      "price": 28.83,
+      "value": 4000.0
+    },
+    {
+      "date": "2026-10-13T07:07:13.391740+00:00",
+      "symbol": "PENG",
+      "side": "BUY",
+      "quantity": 41.808205,
+      "price": 76.54,
+      "value": 3200.0
+    },
+    {
+      "date": "2026-10-13T07:07:15.124669+00:00",
+      "symbol": "SNOW",
+      "side": "BUY",
+      "quantity": 5.603654,
+      "price": 356.91,
+      "value": 2000.0
+    }
+  ]
 }
