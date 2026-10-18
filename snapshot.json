@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-15T20:33:17.868698+00:00",
-  "as_of_date": "2026-10-15",
+  "generated_at": "2026-10-18T22:00:07.888323+00:00",
+  "as_of_date": "2026-10-18",
   "summary": {
     "current": {
-      "equity": 10108.420494,
+      "equity": 8879.812483,
       "cash": 799.999826,
       "open_positions": 3,
       "total_realized_pnl": 0
@@ -29,27 +29,32 @@
       "date": "2026-10-13T07:07:11.122354+00:00",
       "equity": 10108.420494,
       "cash": 799.999826
+    },
+    {
+      "date": "2026-10-19T02:00:07.888323+00:00",
+      "equity": 8879.812483,
+      "cash": 799.999826
     }
   ],
   "pnl_by_day": [],
   "positions_open": [
     {
       "symbol": "RXO",
-      "status": "OPEN",
+      "status": "CARRIED",
       "quantity": 138.744364,
       "entry_price": 28.83,
       "opened_date": "2026-10-12"
     },
     {
       "symbol": "PENG",
-      "status": "EXIT_RECOMMENDED",
+      "status": "CARRIED",
       "quantity": 41.808205,
       "entry_price": 76.54,
       "opened_date": "2026-10-12"
     },
     {
       "symbol": "SNOW",
-      "status": "EXIT_RECOMMENDED",
+      "status": "CARRIED",
       "quantity": 5.603654,
       "entry_price": 356.91,
       "opened_date": "2026-10-12"
