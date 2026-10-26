@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-25T22:00:08.256241+00:00",
-  "as_of_date": "2026-10-25",
+  "generated_at": "2026-10-26T20:30:10.183496+00:00",
+  "as_of_date": "2026-10-26",
   "summary": {
     "current": {
       "equity": 8843.553692,
@@ -52,14 +52,14 @@
     },
     {
       "symbol": "PENG",
-      "status": "CARRIED",
+      "status": "EXIT_RECOMMENDED",
       "quantity": 41.808205,
       "entry_price": 76.54,
       "opened_date": "2026-10-12"
     },
     {
       "symbol": "SNOW",
-      "status": "CARRIED",
+      "status": "EXIT_RECOMMENDED",
       "quantity": 5.603654,
       "entry_price": 356.91,
       "opened_date": "2026-10-12"
