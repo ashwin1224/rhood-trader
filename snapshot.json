@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-10-28T22:40:35.464046+00:00",
+  "generated_at": "2026-10-28T22:41:20.955201+00:00",
   "as_of_date": "2026-10-28",
   "summary": {
     "current": {
-      "equity": 8843.553692,
-      "cash": 799.999826,
-      "open_positions": 3,
-      "total_realized_pnl": 0
+      "equity": 8924.652516,
+      "cash": 5092.533183,
+      "open_positions": 1,
+      "total_realized_pnl": 0.0
     },
     "mtd": {
-      "realized_pnl": 0,
-      "trades_closed": 0,
-      "win_rate": null
+      "realized_pnl": 0.0,
+      "trades_closed": 2,
+      "win_rate": 0.0
     },
     "ytd": {
-      "realized_pnl": 0,
-      "trades_closed": 0,
-      "win_rate": null
+      "realized_pnl": 0.0,
+      "trades_closed": 2,
+      "win_rate": 0.0
     }
   },
   "equity_curve": [
@@ -39,9 +39,21 @@
       "date": "2026-10-26T02:00:08.256241+00:00",
       "equity": 8843.553692,
       "cash": 799.999826
+    },
+    {
+      "date": "2026-10-29T02:41:20.955201+00:00",
+      "equity": 8924.652516,
+      "cash": 5092.533183
     }
   ],
-  "pnl_by_day": [],
+  "pnl_by_day": [
+    {
+      "date": "2026-10-28",
+      "realized_pnl": 0.0,
+      "trades_closed": 2,
+      "wins": 0
+    }
+  ],
   "positions_open": [
     {
       "symbol": "RXO",
@@ -49,23 +61,30 @@
       "quantity": 138.744364,
       "entry_price": 28.83,
       "opened_date": "2026-10-12"
-    },
+    }
+  ],
+  "positions_closed": [
     {
       "symbol": "PENG",
-      "status": "EXIT_RECOMMENDED",
-      "quantity": 41.808205,
+      "quantity": 0.0,
       "entry_price": 76.54,
-      "opened_date": "2026-10-12"
+      "close_price": 58.44,
+      "opened_date": "2026-10-12",
+      "closed_date": "2026-10-28T22:41:27.879436+00:00",
+      "realized_pnl": -0.0,
+      "return_pct": -23.65
     },
     {
       "symbol": "SNOW",
-      "status": "EXIT_RECOMMENDED",
-      "quantity": 5.603654,
+      "quantity": 0.0,
       "entry_price": 356.91,
-      "opened_date": "2026-10-12"
+      "close_price": 330.01,
+      "opened_date": "2026-10-12",
+      "closed_date": "2026-10-28T22:41:28.999501+00:00",
+      "realized_pnl": -0.0,
+      "return_pct": -7.54
     }
   ],
-  "positions_closed": [],
   "trades": [
     {
       "date": "2026-10-13T07:07:11.164508+00:00",
@@ -90,6 +109,22 @@
       "quantity": 5.603654,
       "price": 356.91,
       "value": 2000.0
+    },
+    {
+      "date": "2026-10-29T02:41:27.879436+00:00",
+      "symbol": "PENG",
+      "side": "SELL",
+      "quantity": 41.808205,
+      "price": 58.44,
+      "value": 2443.27
+    },
+    {
+      "date": "2026-10-29T02:41:28.999501+00:00",
+      "symbol": "SNOW",
+      "side": "SELL",
+      "quantity": 5.603654,
+      "price": 330.01,
+      "value": 1849.26
     }
   ]
 }
