@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-05T17:25:54.357178+00:00",
+  "generated_at": "2026-11-05T17:27:02.835597+00:00",
   "as_of_date": "2026-11-05",
   "summary": {
     "current": {
-      "equity": 8924.652516,
+      "equity": 8964.888382,
       "cash": 5092.533183,
       "open_positions": 1,
       "total_realized_pnl": 0.0
@@ -44,6 +44,11 @@
       "date": "2026-10-29T02:41:20.955201+00:00",
       "equity": 8924.652516,
       "cash": 5092.533183
+    },
+    {
+      "date": "2026-11-05T22:27:02.835597+00:00",
+      "equity": 8964.888382,
+      "cash": 5092.533183
     }
   ],
   "pnl_by_day": [
@@ -57,7 +62,7 @@
   "positions_open": [
     {
       "symbol": "RXO",
-      "status": "WATCH",
+      "status": "CARRIED",
       "quantity": 138.744364,
       "entry_price": 28.83,
       "opened_date": "2026-10-12"
