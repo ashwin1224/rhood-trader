@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-11-05T17:32:39.305380+00:00",
+  "generated_at": "2026-11-05T17:33:11.790934+00:00",
   "as_of_date": "2026-11-05",
   "summary": {
     "current": {
-      "equity": 8964.888382,
-      "cash": 5092.533183,
-      "open_positions": 1,
+      "equity": 8958.145129,
+      "cash": 1292.533153,
+      "open_positions": 3,
       "total_realized_pnl": 0.0
     },
     "mtd": {
@@ -49,6 +49,11 @@
       "date": "2026-11-05T22:27:02.835597+00:00",
       "equity": 8964.888382,
       "cash": 5092.533183
+    },
+    {
+      "date": "2026-11-05T22:33:11.790934+00:00",
+      "equity": 8958.145129,
+      "cash": 1292.533153
     }
   ],
   "pnl_by_day": [
@@ -66,6 +71,20 @@
       "quantity": 138.744364,
       "entry_price": 28.83,
       "opened_date": "2026-10-12"
+    },
+    {
+      "symbol": "FCN",
+      "status": "OPEN",
+      "quantity": 10.700637,
+      "entry_price": 196.25,
+      "opened_date": "2026-11-05"
+    },
+    {
+      "symbol": "GXO",
+      "status": "OPEN",
+      "quantity": 30.825023,
+      "entry_price": 55.15,
+      "opened_date": "2026-11-05"
     }
   ],
   "positions_closed": [
@@ -130,6 +149,22 @@
       "quantity": 5.603654,
       "price": 330.01,
       "value": 1849.26
+    },
+    {
+      "date": "2026-11-05T22:33:18.442398+00:00",
+      "symbol": "FCN",
+      "side": "BUY",
+      "quantity": 10.700637,
+      "price": 196.25,
+      "value": 2100.0
+    },
+    {
+      "date": "2026-11-05T22:33:19.405032+00:00",
+      "symbol": "GXO",
+      "side": "BUY",
+      "quantity": 30.825023,
+      "price": 55.15,
+      "value": 1700.0
     }
   ]
 }
