@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-05T17:33:11.790934+00:00",
-  "as_of_date": "2026-11-05",
+  "generated_at": "2026-11-06T21:01:10.753978+00:00",
+  "as_of_date": "2026-11-06",
   "summary": {
     "current": {
       "equity": 8958.145129,
@@ -67,7 +67,7 @@
   "positions_open": [
     {
       "symbol": "RXO",
-      "status": "CARRIED",
+      "status": "WATCH",
       "quantity": 138.744364,
       "entry_price": 28.83,
       "opened_date": "2026-10-12"
