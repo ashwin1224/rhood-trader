@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17T02:31:36.768022+00:00",
+  "generated_at": "2026-11-17T21:30:10.098002+00:00",
   "as_of_date": "2026-11-17",
   "summary": {
     "current": {
@@ -74,7 +74,7 @@
     },
     {
       "symbol": "FCN",
-      "status": "OPEN",
+      "status": "WATCH",
       "quantity": 10.700637,
       "entry_price": 196.25,
       "opened_date": "2026-11-05"
