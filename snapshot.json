@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-17T21:30:10.098002+00:00",
-  "as_of_date": "2026-11-17",
+  "generated_at": "2026-11-20T17:35:41.352430+00:00",
+  "as_of_date": "2026-11-20",
   "summary": {
     "current": {
       "equity": 8958.145129,
@@ -81,7 +81,7 @@
     },
     {
       "symbol": "GXO",
-      "status": "OPEN",
+      "status": "WATCH",
       "quantity": 30.825023,
       "entry_price": 55.15,
       "opened_date": "2026-11-05"
