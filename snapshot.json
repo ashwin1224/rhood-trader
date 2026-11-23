@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-20T17:35:41.352430+00:00",
-  "as_of_date": "2026-11-20",
+  "generated_at": "2026-11-23T21:30:25.421529+00:00",
+  "as_of_date": "2026-11-23",
   "summary": {
     "current": {
       "equity": 8958.145129,
@@ -74,14 +74,14 @@
     },
     {
       "symbol": "FCN",
-      "status": "WATCH",
+      "status": "EXIT_RECOMMENDED",
       "quantity": 10.700637,
       "entry_price": 196.25,
       "opened_date": "2026-11-05"
     },
     {
       "symbol": "GXO",
-      "status": "WATCH",
+      "status": "EXIT_RECOMMENDED",
       "quantity": 30.825023,
       "entry_price": 55.15,
       "opened_date": "2026-11-05"
